@@ -7,8 +7,13 @@ const state = {
 
 const mutations = {
   GET_SUB_MENU: (state, rootMenuName) => {
-    const routes = router.options.routes
+    const routes = JSON.parse(JSON.stringify(router.options.routes))
     const subMenus = routes.filter(route => route.name === rootMenuName)
+    subMenus.forEach(sub => {
+      if (sub.children) {
+        sub.children = sub.children.filter(route => route.rootMenu === true)
+      }
+    })
     state.subMenus = subMenus
     state.currentRootMenu = rootMenuName
   }

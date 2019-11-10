@@ -178,7 +178,17 @@ const createRouter = () => new Router({
 const router = createRouter()
 
 router.beforeEach((to, from, next) => {
-  const rootMenuName = to.meta.parent
+  let menu
+  router.options.routes.forEach(rootMenu => {
+    if (rootMenu.children) {
+      rootMenu.children.forEach(sub => {
+        if (sub.name === to.name) {
+          menu = sub
+        }
+      })
+    }
+  })
+  const rootMenuName = menu.meta.parent
   store.dispatch('menu/getSubMenus', rootMenuName)
   next()
 })
