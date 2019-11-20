@@ -7,20 +7,13 @@ const user = {
   component: Layout,
   redirect: '/sys/user/list',
   name: 'Sys',
-  meta: { title: '用户管理', icon: 'table' },
   children: [
     {
       path: 'list',
       name: 'user',
       rootMenu: true,
-      component: () => import('@/views/user/index'),
-      meta: { title: '用户', icon: 'table', parent: 'Sys' }
-    },
-    {
-      path: 'createUser',
-      name: 'createUser',
-      component: () => import('@/views/user/create/index'),
-      meta: { title: '新增用户', icon: 'table', parent: 'Sys', activeMenu: '/sys/user/list' }
+      component: () => import('@/views/sys/user/index'),
+      meta: { title: '用户管理', icon: 'user', parent: 'Sys' }
     }
   ]
 }
@@ -35,13 +28,47 @@ const role = {
       path: 'list',
       name: 'role',
       rootMenu: true,
-      component: () => import('@/views/role/index'),
+      component: () => import('@/views/sys/role/index'),
       meta: { title: '角色', icon: 'table', parent: 'Sys' }
+    }
+  ]
+}
+
+const dept = {
+  path: '/sys/dept',
+  component: Layout,
+  redirect: '/sys/dept/list',
+  name: 'Sys',
+  children: [
+    {
+      path: 'list',
+      name: 'dict',
+      rootMenu: true,
+      component: () => import('@/views/sys/dept/index'),
+      meta: { title: '组织机构', icon: 'tree', parent: 'Sys' }
+    }
+  ]
+}
+
+const dict = {
+  path: '/sys/dict',
+  component: Layout,
+  redirect: '/sys/dict/list',
+  name: 'Sys',
+  children: [
+    {
+      path: 'list',
+      name: 'dict',
+      rootMenu: true,
+      component: () => import('@/views/sys/dict/index'),
+      meta: { title: '字典管理', icon: 'tree', parent: 'Sys' }
     }
   ]
 }
 
 export {
   user,
-  role
+  role,
+  dept,
+  dict
 }

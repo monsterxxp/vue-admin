@@ -38,10 +38,17 @@ const actions = {
   login({ commit }, userInfo) {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
-        const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
+      login({ username: username.trim(), password: password, rememberMe: false }).then(response => {
+        // const { data } = response
+        const token = {
+          roles: ['admin'],
+          introduction: 'I am a super administrator',
+          avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+          name: 'Super Admin'
+        }
+        
+        commit('SET_TOKEN', token)
+        setToken(token)
         resolve()
       }).catch(error => {
         reject(error)
@@ -51,55 +58,72 @@ const actions = {
 
   // get user info
   getInfo({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
-        const { data } = response
+    const data = {
+      'items': [{
+        id: '1',
+        code: 'Index',
+        name: '控制台'
+      }, {
+        id: '2',
+        code: 'Sys',
+        name: '系统管理'
+      }]
+    }
+    commit('SET_ROOT_MENUS', data.items)
+    // return new Promise((resolve, reject) => {
+    //   getInfo(state.token).then(response => {
+    //     const { data } = response
 
-        if (!data) {
-          reject('Verification failed, please Login again.')
-        }
+    //     if (!data) {
+    //       reject('Verification failed, please Login again.')
+    //     }
 
-        const { roles, name, avatar, introduction } = data
+    //     const { roles, name, avatar, introduction } = data
 
-        // roles must be a non-empty array
-        if (!roles || roles.length <= 0) {
-          reject('getInfo: roles must be a non-null array!')
-        }
-        findRootMenus().then(response => {
-          const { data } = response
-          if (!data) {
-            reject('Verification failed, please Login again.')
-          }
-          const { items } = data
-          // roles must be a non-empty array
-          if (!items || items.length <= 0) {
-            reject('getInfo: roles must be a non-null array!')
-          }
-          commit('SET_ROOT_MENUS', items)
-        })
-        commit('SET_ROLES', roles)
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
-        commit('SET_INTRODUCTION', introduction)
-        resolve(data)
-      }).catch(error => {
-        reject(error)
-      })
-    })
+    //     // roles must be a non-empty array
+    //     if (!roles || roles.length <= 0) {
+    //       reject('getInfo: roles must be a non-null array!')
+    //     }
+    //     findRootMenus().then(response => {
+    //       const { data } = response
+    //       if (!data) {
+    //         reject('Verification failed, please Login again.')
+    //       }
+    //       const { items } = data
+    //       // roles must be a non-empty array
+    //       if (!items || items.length <= 0) {
+    //         reject('getInfo: roles must be a non-null array!')
+    //       }
+    //       commit('SET_ROOT_MENUS', items)
+    //     })
+    //     commit('SET_ROLES', roles)
+    //     commit('SET_NAME', name)
+    //     commit('SET_AVATAR', avatar)
+    //     commit('SET_INTRODUCTION', introduction)
+    //     resolve(data)
+    //   }).catch(error => {
+    //     reject(error)
+    //   })
+    // })
   },
 
   // user logout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
-      logout(state.token).then(() => {
-        commit('SET_TOKEN', '')
-        commit('SET_ROLES', [])
-        removeToken()
-        resetRouter()
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
+      commit('SET_TOKEN', '')
+      commit('SET_ROLES', [])
+      removeToken()
+      resetRouter()
+      resolve()
+      // logout(state.token).then(() => {
+      //   commit('SET_TOKEN', '')
+      //   commit('SET_ROLES', [])
+      //   removeToken()
+      //   resetRouter()
+      //   resolve()
+      // }).catch(error => {
+      //   reject(error)
+      // })
     })
   },
 

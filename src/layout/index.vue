@@ -5,8 +5,8 @@
     <div :class="{hasTagsView:true}" class="main-container">
       <div :class="{'fixed-header':true}">
         <navbar />
-        <!-- <tags-view /> -->
-        <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
+        <tags-view />
+        <!-- <breadcrumb id="breadcrumb-container" class="breadcrumb-container" /> -->
       </div>
       <app-main />
     </div>

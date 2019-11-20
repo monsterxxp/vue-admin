@@ -228,12 +228,11 @@ aside {
   z-index: 9999;
   background: #fff;
   position: absolute;
-  width: 95%;
-  margin: 5px;
+  width: 50%;
   border-radius: 10px;
   padding: 20px;
   text-align: center;
-  box-shadow: darkgrey 5px 5px 30px 5px ;//边框阴影
+  box-shadow: darkgrey 5px 5px 20px 5px ;//边框阴影
 
   label {
     font-weight: normal;
@@ -244,4 +243,8 @@ aside {
     margin-right: 100px;
     float: right;
   }
+}
+.search-label {
+  line-height: 36px;
+  float: right;
 }

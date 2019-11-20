@@ -6,7 +6,7 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
-import { user, role } from './modules/sys'
+import { user, role, dept, dict } from './modules/sys'
 import { dashboard } from './modules/dashboard'
 
 /**
@@ -37,6 +37,8 @@ export const constantRoutes = [
   dashboard,
   user,
   role,
+  dept,
+  dict,
   {
     path: '/login',
     component: () => import('@/views/login/index'),

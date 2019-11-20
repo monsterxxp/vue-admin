@@ -12,7 +12,7 @@ const dashboard = {
     name: 'dashboard',
     rootMenu: true,
     component: () => import('@/views/dashboard/index'),
-    meta: { title: '首页', icon: 'dashboard', parent: 'Index' }
+    meta: { title: '首页', icon: 'dashboard', parent: 'Index', affix: true }
   }]
 }
 
