@@ -110,7 +110,7 @@ export default {
               this.open = false
               this.submitLoading = false
               this.$message({
-                message: '新增成功',
+                message: '修改成功',
                 type: 'success'
               })
             }).catch(()=>{

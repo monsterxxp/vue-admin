@@ -1,12 +1,12 @@
 <template>
   <div >
-    <el-select v-if="type === 'tree'" :value="selectValue" placeholder="请选择" :clearable="clearValue" :multiple="multiple" @clear="clearHandle">
+    <el-select v-if="type === 'tree'" ref="treeSelect" :value="selectValue" placeholder="请选择" :clearable="clearValue" :multiple="multiple" @clear="clearHandle">
         <el-option
             class="tree-select"
             :label="selectValue"
             :value="selectValue">
             <el-tree 
-                ref="selectTree"
+                ref="tree"
                 :data="content" 
                 :props="defaultProps"
                 :show-checkbox="multiple"
@@ -93,20 +93,19 @@ export default {
   methods: {
     initData() {
       if(this.treeId){
-        this.selectValue = this.$refs.selectTree.getNode(this.treeId).data[this.label]
-        this.$refs.selectTree.setCurrentKey(this.treeId)
+        this.selectValue = this.$refs.tree.getNode(this.treeId)?this.$refs.tree.getNode(this.treeId).data[this.label]:''
+        this.$refs.tree.setCurrentKey(this.treeId)
         this.defaultExpandedKey = [this.treeId]
       }
     },
     handleNodeClick(data) {
       if (!this.multiple) {
-          console.log(data)
         this.selectValue = data.name
         this.$emit('change', data.id)
+        this.$refs.treeSelect.blur()
       }
     },
     handleCheckChange(data) {
-      console.log(data)
     },
     // 清除选中
     clearHandle(){

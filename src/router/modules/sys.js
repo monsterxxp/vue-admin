@@ -29,7 +29,7 @@ const role = {
       name: 'role',
       rootMenu: true,
       component: () => import('@/views/sys/role/index'),
-      meta: { title: '角色', icon: 'table', parent: 'Sys' }
+      meta: { title: '角色管理', icon: 'peoples', parent: 'Sys' }
     }
   ]
 }
@@ -50,6 +50,22 @@ const dept = {
   ]
 }
 
+const menu = {
+  path: '/sys/menu',
+  component: Layout,
+  redirect: '/sys/menu/list',
+  name: 'Sys',
+  children: [
+    {
+      path: 'list',
+      name: 'menu',
+      rootMenu: true,
+      component: () => import('@/views/sys/menu/index'),
+      meta: { title: '菜单管理', icon: 'tree-table', parent: 'Sys' }
+    }
+  ]
+}
+
 const dict = {
   path: '/sys/dict',
   component: Layout,
@@ -61,7 +77,7 @@ const dict = {
       name: 'dict',
       rootMenu: true,
       component: () => import('@/views/sys/dict/index'),
-      meta: { title: '字典管理', icon: 'tree', parent: 'Sys' }
+      meta: { title: '字典管理', icon: 'education', parent: 'Sys' }
     }
   ]
 }
@@ -70,5 +86,6 @@ export {
   user,
   role,
   dept,
+  menu,
   dict
 }
